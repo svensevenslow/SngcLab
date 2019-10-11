@@ -1,6 +1,8 @@
 package com.example.sngcass3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -113,18 +115,13 @@ public class MapsActivity extends AppCompatActivity {
             }
         };
 
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    Activity#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for Activity#requestPermissions for more details.
-                    return;
+
+                   return;
                 }
                 String fileName = "gpsLogger" + System.currentTimeMillis() + ".csv";
                 file = new File(getExternalFilesDir(null), fileName);
@@ -149,17 +146,17 @@ public class MapsActivity extends AppCompatActivity {
             }
         }));
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
+            requestPermission();
             return;
         }
         locationManager.requestLocationUpdates("gps", 1000, 0, locationListener);
     }
+
+    public void requestPermission() {
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+    }
+
 
     public void performFileSearch(){
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
