@@ -60,8 +60,8 @@ public class PlotMap extends FragmentActivity implements OnMapReadyCallback {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] locInfo = line.split(",");
-                LatLng marker = new LatLng(Double.parseDouble(locInfo[2]),Double.parseDouble(locInfo[3]));
-                mMap.addMarker(new MarkerOptions().position(marker).title(locInfo[0] + " " + locInfo[1]));
+                LatLng marker = new LatLng(Double.parseDouble(locInfo[3]), Double.parseDouble(locInfo[2]));
+                mMap.addMarker(new MarkerOptions().position(marker));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
             }
         }

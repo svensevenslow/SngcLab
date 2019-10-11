@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SngcAss3</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="Plot">View Map</string>
+</resources>
